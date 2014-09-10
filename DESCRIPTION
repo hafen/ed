@@ -1,0 +1,18 @@
+Package: ed
+Type: Package
+Title: ed: a regression approach to density estimation
+Version: 0.1
+Date: 2014-09-10
+Author: Ryan Hafen
+Maintainer: Ryan Hafen <rhafen@gmail.com>
+Description: A nonparametric regression approach to univariate density
+    estimation
+License: BSD_3_clause + file LICENSE
+LazyLoad: yes
+LazyData: yes
+Depends:
+    lattice
+Suggests:
+    testthat (>= 0.8.1),
+    roxygen2 (>= 4.0.0),
+    benchden

@@ -1,0 +1,9 @@
+.git
+^\.travis\.yml$
+.DS_Store
+..Rcheck
+CONTRIBUTING\.md
+LICENSE\.md
+NEWS\.md
+^misc
+.*junk$
