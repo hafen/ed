@@ -5,8 +5,7 @@ Version: 0.1
 Date: 2014-09-10
 Author: Ryan Hafen
 Maintainer: Ryan Hafen <rhafen@gmail.com>
-Description: A nonparametric regression approach to univariate density
-    estimation
+Description: Ed is a method for visualizing and fitting univariate densities.
 License: BSD_3_clause + file LICENSE
 LazyLoad: yes
 LazyData: yes
@@ -16,3 +15,4 @@ Suggests:
     testthat (>= 0.8.1),
     roxygen2 (>= 4.0.0),
     benchden
+RoxygenNote: 5.0.1
