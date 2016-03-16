@@ -1,15 +1,15 @@
-#' Calculate ed Preliminary Estimates
+#' Calculate ed Raw Estimates
 #'
-#' Calculate ed preliminary estimates
+#' Calculate ed raw estimates
 #'
 #' @param x data, a vector
-#' @param k the gap width (in number of observations) with which to compute the preliminary estimates
+#' @param k the gap width (in number of observations) with which to compute the raw estimates
 #' @param disjoint should non-overlapping gaps be computed? (default TRUE)
 #' @param f a function providing a true density or hypothesized density, with which the ed estimate can be compared (optional)
 #'
-#' @return a data frame with: \code{x}, the location at which the preliminary estimate was calculated; \code{pre} the preliminary log density estimate
+#' @return a data frame with: \code{x}, the location at which the raw estimate was calculated; \code{raw} the raw log density estimate
 #'
-#' @note It is advised to stick with \code{disjoint=TRUE} since this will ensure that the errors of subsequent fitting of the preliminary estimates will be independent.
+#' @note It is advised to stick with \code{disjoint=TRUE} since this will ensure that the errors of subsequent fitting of the raw estimates will be independent.
 #'
 #' @author Ryan Hafen
 #'
@@ -17,13 +17,13 @@
 #'
 #' @examples
 #' x <- rnorm(1000)
-#' x_pre <- ed_pre(x)
-#' plot(x_pre)
+#' x_raw <- ed_raw(x)
+#' plot(x_raw)
 #' # overlay actual log density
 #' ss <- seq(-4, 4, length = 200)
 #' lines(ss, log(dnorm(ss)))
 #' @export
-ed_pre <- function(x, k = 10, disjoint = TRUE, f = NULL) {
+ed_raw <- function(x, k = 10, disjoint = TRUE, f = NULL) {
   xs <- sort(x)
   n <- length(xs)
   if (k >= n)
@@ -41,13 +41,13 @@ ed_pre <- function(x, k = 10, disjoint = TRUE, f = NULL) {
   dists <- xs[ind2] - xs[ind]
 
   balloon <- k / (n * dists)
-  pre <- log(balloon) - log(k) + digamma(k)
-  res <- data.frame(x = x_eval, pre = pre)
+  raw <- log(balloon) - log(k) + digamma(k)
+  res <- data.frame(x = x_eval, raw = raw)
   attr(res, "ed") <- list(
     k = k,
     disjoint = disjoint,
     f = f
   )
-  class(res) <- c("ed_pre", "data.frame")
+  class(res) <- c("ed_raw", "data.frame")
   res
 }

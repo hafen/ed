@@ -11,7 +11,7 @@ ed(x, k = 10, disjoint = TRUE, degree = 2, span = 0.3, xgrid = 500,
 \arguments{
 \item{x}{data, a vector}
 
-\item{k}{the gap width (in number of observations) with which to compute the preliminary estimates}
+\item{k}{the gap width (in number of observations) with which to compute the raw estimates}
 
 \item{disjoint}{should non-overlapping gaps be computed? (default \code{TRUE})}
 
@@ -39,18 +39,15 @@ ed(x, k = 10, disjoint = TRUE, degree = 2, span = 0.3, xgrid = 500,
 a list with a lot of things (to be documented...).  For now, look at str(result) to get an idea.
 }
 \description{
-Calculate preliminary ed density estimates and fit ed model to data using loess
+Calculate raw ed density estimates and fit ed model to data using loess
 }
 \details{
 bounds...
 }
 \note{
-This function is provided as a convenience, but often you may want to simply compute the preliminary estimates using \code{\link{ed_pre}} and iteratively figure out how to fit the preliminary estimates with whatever nonparametric method you like.
-}
-\author{
-Ryan Hafen
+This function is provided as a convenience, but often you may want to simply compute the raw estimates using \code{\link{ed_raw}} and iteratively figure out how to fit the raw estimates with whatever nonparametric method you like.
 }
 \seealso{
-\code{\link{ed_pre}}, \code{\link{ed_plot}}
+\code{\link{ed_raw}}, \code{\link{ed_plot}}
 }
 

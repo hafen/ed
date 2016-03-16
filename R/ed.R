@@ -1,9 +1,9 @@
 #' Fit ed model to data
 #'
-#' Calculate preliminary ed density estimates and fit ed model to data using loess
+#' Calculate raw ed density estimates and fit ed model to data using loess
 #'
 #' @param x data, a vector
-#' @param k the gap width (in number of observations) with which to compute the preliminary estimates
+#' @param k the gap width (in number of observations) with which to compute the raw estimates
 #' @param disjoint should non-overlapping gaps be computed? (default \code{TRUE})
 #' @param degree degree of loess fitting  (see \code{\link{loess}})
 #' @param span span of loess fitting (see \code{\link{loess}})
@@ -21,11 +21,9 @@
 #' @details
 #' bounds...
 #'
-#' @note This function is provided as a convenience, but often you may want to simply compute the preliminary estimates using \code{\link{ed_pre}} and iteratively figure out how to fit the preliminary estimates with whatever nonparametric method you like.
+#' @note This function is provided as a convenience, but often you may want to simply compute the raw estimates using \code{\link{ed_raw}} and iteratively figure out how to fit the raw estimates with whatever nonparametric method you like.
 #'
-#' @author Ryan Hafen
-#'
-#' @seealso \code{\link{ed_pre}}, \code{\link{ed_plot}}
+#' @seealso \code{\link{ed_raw}}, \code{\link{ed_plot}}
 #'
 #' @export
 ed <- function(x, k = 10, disjoint = TRUE, degree = 2, span = 0.3,
@@ -105,19 +103,19 @@ ed <- function(x, k = 10, disjoint = TRUE, degree = 2, span = 0.3,
 
   s <- seq(bounds[1], bounds[2], length = xgrid)
 
-  pre <- log(balloon) - log(k) + digamma(k)
+  raw <- log(balloon) - log(k) + digamma(k)
 
-  pre_loess <- loess(pre ~ x_eval, weights = w, degree = degree,
+  raw_loess <- loess(raw ~ x_eval, weights = w, degree = degree,
     span = span, family = family, control = control)
 
-  p_pre_loess <- predict(pre_loess)
+  p_raw_loess <- predict(raw_loess)
 
-  ellhat <- predict(pre_loess, newdata = s)
+  ellhat <- predict(raw_loess, newdata = s)
   if (delta > 0) {
     ellhat[ellhat < u_min] <- u_min
     fhat <- (exp(ellhat) - delta * dunif(s, u_bounds[1], u_bounds[2])) / (1 - delta)
     # fhat[fhat < 0] <- 0
-    p_pre_loess[p_pre_loess < u_min] <- u_min
+    p_raw_loess[p_raw_loess < u_min] <- u_min
   } else {
     fhat <- exp(ellhat)
   }
@@ -141,9 +139,9 @@ ed <- function(x, k = 10, disjoint = TRUE, degree = 2, span = 0.3,
     surface   = data.frame(f = as.numeric(fhat), x = as.numeric(s), logf = ellhat),
     dat       = data.frame(
                   x     = x_eval[no_endpoints],
-                  pre   = pre[no_endpoints],
-                  fhat  = exp(p_pre_loess)[no_endpoints],
-                  resid = (pre - p_pre_loess)[no_endpoints]),
+                  raw   = raw[no_endpoints],
+                  fhat  = exp(p_raw_loess)[no_endpoints],
+                  resid = (raw - p_raw_loess)[no_endpoints]),
     c         = c,
     f         = f,
     mse       = mse,
@@ -152,7 +150,7 @@ ed <- function(x, k = 10, disjoint = TRUE, degree = 2, span = 0.3,
     bounds    = bounds,
     u_bounds  = u_bounds,
     n         = n,
-    lo        = pre_loess,
+    lo        = raw_loess,
     normalize = normalize
   )
   class(res) <- c("ed", "list")

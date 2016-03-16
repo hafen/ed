@@ -1,31 +1,31 @@
 #' Panel / Prepanel Functions for ed_plot
 #'
 #' @param x data, a vector
-#' @param kk the gap width (in number of observations) with which to compute the preliminary estimates
+#' @param kk the gap width (in number of observations) with which to compute the raw estimates
 #' @param lims,lwd,type,groups,\ldots parameters passed to \code{panel.xyplot}
 #' @rdname edPlotPanel
 #' @export
 panel.ed <- function(x, kk = 10, lims = TRUE, lwd = 2,
   type = "p", groups = NULL, ...) {
 
-  a <- ed_pre(x, k = kk)
-  panel.xyplot(a$x, a$pre, ...)
+  a <- ed_raw(x, k = kk)
+  panel.xyplot(a$x, a$raw, ...)
 }
 
 #' @rdname edPlotPanel
 #' @export
 prepanel.ed <- function(x, kk = 10, groups = NULL, ...) {
   if (is.null(groups)) {
-    a <- ed_pre(x, k = kk)
+    a <- ed_raw(x, k = kk)
 
     xlims <- range(a$x)
-    ylims <- range(a$pre)
+    ylims <- range(a$raw)
   } else {
     vals <- sort(unique(groups))
 
     lims <- lapply(vals, function(v) {
-      a <- ed_pre(x[groups == v], k = kk)
-      list(range(a$pre), range(a$pre))
+      a <- ed_raw(x[groups == v], k = kk)
+      list(range(a$raw), range(a$raw))
     })
 
     xlims <- range(do.call(c, lapply(lims, "[[", 2)))
@@ -34,11 +34,11 @@ prepanel.ed <- function(x, kk = 10, groups = NULL, ...) {
   list(ylim = ylims, xlim = xlims)
 }
 
-#' Log density plot using ed preliminary estimates
+#' Log density plot using ed raw estimates
 #'
-#' Plot the log density of data using ed preliminary estimates
+#' Plot the log density of data using ed raw estimates
 #'
-#' @param x either a formula (e.g. "~ data | condvar") or a numeric vector for which to calculate and plot ed preliminary estimates
+#' @param x either a formula (e.g. "~ data | condvar") or a numeric vector for which to calculate and plot ed raw estimates
 #' @param data if \code{x} is a formula, an optional data source (usually a data frame) in which variables are to be evaluated (see \code{\link{xyplot}} for details).
 #' @param panel a function, called once for each panel, that uses the packet (subset of panel variables) corresponding to the panel to create a display. The default panel function is \code{\link{panel.ed}} and is documented separately, and has arguments that can be used to customize its output in various ways. Such arguments can usually be directly supplied to the high-level function.
 #' @param prepanel See \code{\link{xyplot}}.

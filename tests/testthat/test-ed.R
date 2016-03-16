@@ -1,11 +1,11 @@
 context("test ed")
 
-test_that("ed_pre", {
+test_that("ed_raw", {
   set.seed(1234)
   x <- rnorm(1000)
-  x_pre <- ed_pre(x)
+  x_raw <- ed_raw(x)
 
-  # plot(x_pre)
+  # plot(x_raw)
   # ss <- seq(-4, 4, length = 200)
   # lines(ss, log(dnorm(ss)))
 })
@@ -23,5 +23,4 @@ test_that("ed", {
     degree = 2, span = 0.45,
     xgrid = 500, bounds = c(-1, 3.75),
     f = function(x) dmix(x, mu, sigma, 0.5))
-  # plot(x_ed)
 })

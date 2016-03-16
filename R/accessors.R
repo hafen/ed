@@ -22,12 +22,12 @@ fitted.ed <- function(x, ...) {
 #   qq_core(sort(resid(x)), x$parms$k, length(x$dat$x), normal = normal, dat = dat, ...)
 # }
 #
-# qq.ed_pre <- function(x, normal = FALSE, dat = FALSE, ...) {
+# qq.ed_raw <- function(x, normal = FALSE, dat = FALSE, ...) {
 #   if (is.null(x$f)) {
-#     warning("cannot call qq for preliminary estimates if f is not specified")
+#     warning("cannot call qq for raw estimates if f is not specified")
 #     return(NULL)
 #   } else {
-#     qq_core(sort(x$data$pre - log(x$f(x$data$x))), x$k, length(x$data$x), normal = normal, dat = dat, ...)
+#     qq_core(sort(x$data$raw - log(x$f(x$data$x))), x$k, length(x$data$x), normal = normal, dat = dat, ...)
 #   }
 # }
 #
@@ -58,7 +58,7 @@ fitted.ed <- function(x, ...) {
 #       quart = quart,
 #       cex = 0.5,
 #       xlab = "Expected Order Statistic Value",
-#       ylab = "Ordered Sample Preliminary Estimates",
+#       ylab = "Ordered Sample Raw Estimates",
 #       ...
 #     )
 #     qqgam

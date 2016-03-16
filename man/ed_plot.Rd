@@ -2,13 +2,13 @@
 % Please edit documentation in R/plots.R
 \name{ed_plot}
 \alias{ed_plot}
-\title{Log density plot using ed preliminary estimates}
+\title{Log density plot using ed raw estimates}
 \usage{
 ed_plot(x, data = NULL, panel = "panel.ed", prepanel = "prepanel.ed",
   groups = NULL, ylab = "Log Density", ...)
 }
 \arguments{
-\item{x}{either a formula (e.g. "~ data | condvar") or a numeric vector for which to calculate and plot ed preliminary estimates}
+\item{x}{either a formula (e.g. "~ data | condvar") or a numeric vector for which to calculate and plot ed raw estimates}
 
 \item{data}{if \code{x} is a formula, an optional data source (usually a data frame) in which variables are to be evaluated (see \code{\link{xyplot}} for details).}
 
@@ -26,7 +26,7 @@ ed_plot(x, data = NULL, panel = "panel.ed", prepanel = "prepanel.ed",
 An object of class "trellis".
 }
 \description{
-Plot the log density of data using ed preliminary estimates
+Plot the log density of data using ed raw estimates
 }
 \examples{
 # plot benchden data
