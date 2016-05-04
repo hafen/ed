@@ -54,7 +54,7 @@ prepanel.ed <- function(x, kk = 10, groups = NULL, ...) {
 #'
 #' @examples
 #' # plot benchden data
-#' ed_plot(~ x | density, data = benchden,
+#' ed_plot(~ x | density, data = benchdat,
 #'    scales = list(relation = "free", draw = FALSE),
 #'    as.table = TRUE
 #' )

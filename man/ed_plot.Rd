@@ -30,7 +30,7 @@ Plot the log density of data using ed raw estimates
 }
 \examples{
 # plot benchden data
-ed_plot(~ x | density, data = benchden,
+ed_plot(~ x | density, data = benchdat,
    scales = list(relation = "free", draw = FALSE),
    as.table = TRUE
 )

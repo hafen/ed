@@ -16,7 +16,7 @@ devtools::install_github("hafen/ed")
 To recreate the plot above:
 
 ```r
-ed_plot(~ x | density, data = benchden,
+ed_plot(~ x | density, data = benchdat,
   scales = list(relation = "free", draw = FALSE),
   panel = function(x, y, ..., subscripts) {
     panel.ed(x, ...)
