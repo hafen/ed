@@ -23,7 +23,7 @@ ed_plot(~ x | density, data = benchdat,
     tmp <- ed_raw(x)
     ss <- seq(min(tmp$x), max(tmp$x), length = 200)
     panel.lines(ss, log(benchden::dberdev(ss,
-      dnum = benchden$dennum[subscripts][1])), col = "black", lwd = 2)
+      dnum = benchdat$dennum[subscripts][1])), col = "black", lwd = 2)
   },
   cex = 0.3,
   between = list(x = 0.25, y = 0.25),
